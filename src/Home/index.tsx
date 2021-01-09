@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles.css';
 import { ReactComponent as MainImage } from './main.svg'
-import Footer from '../Footer';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+
+    useEffect(() => {
+        window.navigator.geolocation.getCurrentPosition(position => {
+            console.log(position.coords.latitude);
+            console.log(position.coords.longitude);
+        })
+    }, [])
+
     return (
         <>
             <div className="home-container">
@@ -25,8 +32,7 @@ const Home = () => {
                         <MainImage />
                     </div>
                 </div>
-            </div>
-            <Footer />
+            </div>         
         </>
     )
 }
