@@ -1,21 +1,19 @@
 import React from 'react';
+import { formatPrice } from './helpers';
 import { Product } from './types';
 
 export type ProductCardProps = {
     product: Product;
+    onSelectProduct: (product: Product) => void;
+    isSelected: boolean;
 }
 
-const formatPrice = (price: number) => {
-    const formatter = new Intl.NumberFormat('pt-BR', {
-        currency: 'BRL',
-        style: 'currency'
-    })
-    return formatter.format(price);
-}
 
-const ProductCard = ({product}: ProductCardProps) => {
+
+const ProductCard = ({product, onSelectProduct, isSelected}: ProductCardProps) => {
     return (
-        <div className="order-card-container">
+        <div className={`order-card-container ${isSelected ? 'selected' : ''}`}
+            onClick={() => onSelectProduct(product)}>
             <h3 className="order-card-title">
                 {product.name}
             </h3>
